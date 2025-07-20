@@ -195,7 +195,7 @@ class KorfuUrlaubsApp
 		let iconHtml = this.getIconFuerTyp(location.typ);
 
 		const markerContent = document.createElement('div');
-		markerContent.innerHTML = `<div style="background-color: ${markerColor}; width: 25px; height: 25px; border-radius: 50%; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">${iconHtml}</div>`;
+		markerContent.innerHTML = `<div style="background-color: ${markerColor}; width: 50px; height: 50px; border-radius: 50%; border: 3px solid white; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">${iconHtml}</div>`;
 		markerContent.className = 'custom-marker';
 
 		const marker = new google.maps.marker.AdvancedMarkerElement({
