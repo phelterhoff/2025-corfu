@@ -431,23 +431,20 @@ class KorfuUrlaubsApp {
 
             const placeId = await findPlacePromise;
 
-            const detailsRequest = {
-                placeId: placeId,
-                fields: ['photos']
-            };
-
-            const getDetailsPromise = new Promise((resolve, reject) => {
-                this.placesService.getDetails(detailsRequest, (place, status) => {
-                    if (status === google.maps.places.PlacesServiceStatus.OK && place && place.photos && place.photos.length > 0) {
-                        resolve(place.photos[0].photo_reference);
-                    } else {
-                        reject(new Error('No photos found or error: ' + status));
-                    }
-                });
+            const place = new google.maps.places.Place({
+                id: placeId,
+                fields: ["photos"]
             });
 
-            const photoReference = await getDetailsPromise;
-            return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${googleMapsApiKey}`;
+            await place.fetchFields({
+                fields: ["photos"]
+            });
+
+            if (place.photos && place.photos.length > 0) {
+                return place.photos[0].getUrl({
+                    maxWidth: 400
+                });
+            }
 
         } catch (error) {
             console.error("Error fetching image from Google Places Photos:", error);
