@@ -1,0 +1,572 @@
+/* Griechisches Urlaubsthema - Korfu SPA */
+
+:root {
+    --primary-blue: #0066cc;
+    --secondary-blue: #4d94ff;
+    --light-blue: #e6f3ff;
+    --greek-white: #ffffff;
+    --sand-beige: #f5f2e8;
+    --sunset-orange: #ff8c42;
+    --sea-green: #00b3b3;
+    --text-dark: #2c3e50;
+    --text-light: #666;
+    --border-light: #e0e6ed;
+    --shadow: rgba(0, 102, 204, 0.1);
+}
+
+/* Reset und Basis */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--sand-beige) 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    color: var(--greek-white);
+    padding: 2rem 0;
+    box-shadow: 0 4px 20px var(--shadow);
+}
+
+.header-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.header-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Navigation */
+.navigation {
+    background: var(--greek-white);
+    border-bottom: 3px solid var(--primary-blue);
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.nav-btn {
+    background: var(--primary-blue);
+    color: var(--greek-white);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px var(--shadow);
+}
+
+.nav-btn:hover {
+    background: var(--secondary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px var(--shadow);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.day-selector {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: 2px solid var(--primary-blue);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: var(--greek-white);
+    color: var(--text-dark);
+    cursor: pointer;
+}
+
+.view-toggle {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.toggle-btn {
+    background: var(--border-light);
+    color: var(--text-dark);
+    border: 2px solid var(--border-light);
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: var(--sea-green);
+    color: var(--greek-white);
+    border-color: var(--sea-green);
+}
+
+.toggle-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Hauptinhalt */
+.main-content {
+    padding: 2rem 0;
+    min-height: 70vh;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* Kartensektion */
+.map-section {
+    background: var(--greek-white);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 25px var(--shadow);
+    border: 1px solid var(--border-light);
+}
+
+.map-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.map-header h2 {
+    color: var(--primary-blue);
+    font-size: 1.5rem;
+    flex: 1;
+}
+
+.map-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.map-control-btn {
+    background: var(--sunset-orange);
+    color: var(--greek-white);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.map-control-btn:hover {
+    background: #e67932;
+    transform: translateY(-1px);
+}
+
+.map-container {
+    height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--border-light);
+    margin-bottom: 1rem;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.legend-marker-standard {
+    background: var(--primary-blue);
+}
+
+.legend-marker-boat {
+    background: var(--sunset-orange);
+}
+
+.legend-line {
+    width: 20px;
+    height: 3px;
+    background: var(--sea-green);
+    border-radius: 2px;
+}
+
+/* Detailsektion */
+.details-section {
+    background: var(--greek-white);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 25px var(--shadow);
+    border: 1px solid var(--border-light);
+}
+
+.day-header {
+    border-bottom: 3px solid var(--primary-blue);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.day-header h2 {
+    color: var(--primary-blue);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.day-meta {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.day-weather {
+    background: var(--light-blue);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-weight: 600;
+}
+
+.day-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.day-content h3 {
+    color: var(--sea-green);
+    margin: 1.5rem 0 0.8rem 0;
+    font-size: 1.3rem;
+}
+
+.day-content h4 {
+    color: var(--sunset-orange);
+    margin: 1rem 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.day-content ul {
+    margin: 1rem 0 1rem 2rem;
+}
+
+.day-content li {
+    margin-bottom: 0.5rem;
+}
+
+.day-content strong {
+    color: var(--primary-blue);
+}
+
+.day-summary {
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--sand-beige) 100%);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    border-left: 4px solid var(--sea-green);
+}
+
+.day-summary h4 {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--text-dark);
+    color: var(--greek-white);
+    padding: 2rem 0;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .nav-controls {
+        margin-bottom: 0;
+    }
+    
+    .navigation .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .map-container {
+        height: 600px;
+    }
+    
+    
+    .locations-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .header-title {
+        font-size: 3rem;
+    }
+    
+    .header-subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .container {
+        padding: 0 40px;
+    }
+    
+    .map-container {
+        height: 700px;
+    }
+}
+
+@media (max-width: 767px) {
+    .header-title {
+        font-size: 2rem;
+    }
+    
+    .nav-controls {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .nav-btn {
+        width: 100%;
+    }
+    
+    .view-toggle {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .toggle-btn {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .map-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .map-controls {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .map-container {
+        height: 400px;
+    }
+    
+    .details-section {
+        padding: 1.5rem;
+    }
+    
+    .locations-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .legend-item {
+        font-size: 0.8rem;
+    }
+}
+
+/* Animationen */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Leaflet Karten-Anpassungen */
+.leaflet-popup-content-wrapper {
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow);
+}
+
+.leaflet-popup-content {
+    margin: 15px;
+    font-family: inherit;
+}
+
+.leaflet-popup-content h4 {
+    color: var(--primary-blue);
+    margin-bottom: 0.5rem;
+}
+
+.leaflet-popup-tip {
+    background: var(--greek-white);
+}
+
+
+/* Locations-Sektion */
+.locations-section {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 2px dashed var(--border-light);
+}
+
+.locations-section h3 {
+    color: var(--sunset-orange);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.location-card {
+    background: var(--greek-white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px var(--shadow);
+    border: 1px solid var(--border-light);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.location-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px var(--shadow);
+}
+
+.location-image {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, var(--light-blue) 0%, var(--secondary-blue) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--greek-white);
+    position: relative;
+    overflow: hidden;
+}
+
+.location-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.location-content {
+    padding: 1.2rem;
+}
+
+.location-title {
+    color: var(--primary-blue);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.location-description {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+}
+
+.location-time {
+    color: var(--sea-green);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.location-coordinates {
+    color: var(--text-light);
+    font-size: 0.8rem;
+    font-family: monospace;
+    margin-bottom: 0.8rem;
+}
+
+.location-tag {
+    display: inline-block;
+    background: var(--sunset-orange);
+    color: var(--greek-white);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Versteckte Sektionen */
+.hidden {
+    display: none;
+}
+
+/* Spezielle Marker-Styles für verschiedene Aktivitäten */
+.activity-marker {
+    background: var(--primary-blue);
+    border: 3px solid var(--greek-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.boat-marker {
+    background: var(--sunset-orange);
+    border: 3px solid var(--greek-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.restaurant-marker {
+    background: var(--sea-green);
+    border: 3px solid var(--greek-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px var(--shadow);
+}
