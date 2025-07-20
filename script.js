@@ -436,9 +436,14 @@ class KorfuUrlaubsApp {
             });
 
             if (place.photos && place.photos.length > 0) {
-                return place.photos[0].getUrl({
-                    maxWidth: 400
-                });
+                if (typeof place.photos[0].getUrl === 'function') {
+                    return place.photos[0].getUrl({
+                        maxWidth: 400
+                    });
+                } else if (place.photos[0].photo_reference) {
+                    // Fallback to manual URL construction if getUrl is not available
+                    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=${googleMapsApiKey}`;
+                }
             }
 
         } catch (error) {
