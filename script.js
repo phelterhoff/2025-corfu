@@ -7,6 +7,7 @@ class KorfuUrlaubsApp {
         this.karte = null;
         this.markerGroup = null;
         this.routenGroup = null;
+        this.placesService = null;
         this.aktuelleAnsicht = 'map'; // 'map' oder 'details'
         this.alleMarkerSichtbar = false;
         
@@ -34,6 +35,7 @@ class KorfuUrlaubsApp {
 
         this.markerGroup = []; // Array für Google Maps Marker
         this.routenGroup = []; // Array für Google Maps Polylines
+        this.placesService = new google.maps.places.PlacesService(this.karte);
     }
 
     // Event Listeners
@@ -408,29 +410,44 @@ class KorfuUrlaubsApp {
     // Funktion zum Abrufen von Bildern für Locations
     async fetchLocationImage(location) {
         const defaultPlaceholder = "https://via.placeholder.com/150";
-        const googleMapsApiKey = "AIzaSyDaSjYngR6cd5O9BMqPbCTStFFG4AoOFis"; // Your provided API key
 
         // 1. Try Google Places Photos API
         try {
-            // Step 1: Find Place to get place_id
-            const findPlaceUrl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${encodeURIComponent(location.name)}&inputtype=textquery&fields=place_id&key=${googleMapsApiKey}`;
-            const findPlaceResponse = await fetch(findPlaceUrl);
-            const findPlaceData = await findPlaceResponse.json();
+            const request = {
+                query: location.name,
+                fields: ['place_id']
+            };
 
-            if (findPlaceData.candidates && findPlaceData.candidates.length > 0) {
-                const placeId = findPlaceData.candidates[0].place_id;
+            const findPlacePromise = new Promise((resolve, reject) => {
+                this.placesService.findPlaceFromQuery(request, (results, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK && results && results.length > 0) {
+                        resolve(results[0].place_id);
+                    } else {
+                        reject(new Error('Place not found or error: ' + status));
+                    }
+                });
+            });
 
-                // Step 2: Get Place Details to find photo_reference
-                const placeDetailsUrl = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=photos&key=${googleMapsApiKey}`;
-                const placeDetailsResponse = await fetch(placeDetailsUrl);
-                const placeDetailsData = await placeDetailsResponse.json();
+            const placeId = await findPlacePromise;
 
-                if (placeDetailsData.result && placeDetailsData.result.photos && placeDetailsData.result.photos.length > 0) {
-                    const photoReference = placeDetailsData.result.photos[0].photo_reference;
-                    // Construct the photo URL
-                    return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${googleMapsApiKey}`;
-                }
-            }
+            const detailsRequest = {
+                placeId: placeId,
+                fields: ['photos']
+            };
+
+            const getDetailsPromise = new Promise((resolve, reject) => {
+                this.placesService.getDetails(detailsRequest, (place, status) => {
+                    if (status === google.maps.places.PlacesServiceStatus.OK && place && place.photos && place.photos.length > 0) {
+                        resolve(place.photos[0].photo_reference);
+                    } else {
+                        reject(new Error('No photos found or error: ' + status));
+                    }
+                });
+            });
+
+            const photoReference = await getDetailsPromise;
+            return `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${googleMapsApiKey}`;
+
         } catch (error) {
             console.error("Error fetching image from Google Places Photos:", error);
         }

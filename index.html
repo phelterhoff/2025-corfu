@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Korfu Familienurlaub 2025 - 14 Tage Urlaubsplan</title>
-
-
-
+    
+    
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -22,7 +22,7 @@
         <div class="container">
             <div class="nav-controls">
                 <button id="prevDay" class="nav-btn nav-btn-prev">← Voriger Tag</button>
-
+                
                 <select id="daySelector" class="day-selector">
                     <option value="1">Tag 1 - So 27.07. - Ankunft</option>
                     <option value="2">Tag 2 - Mo 28.07. - Schnorcheltag</option>
@@ -40,10 +40,10 @@
                     <option value="14">Tag 14 - Sa 09.08. - Letzter Tag</option>
                     <option value="15">Tag 15 - So 10.08. - Abreise</option>
                 </select>
-
+                
                 <button id="nextDay" class="nav-btn nav-btn-next">Nächster Tag →</button>
             </div>
-
+            
             <div class="view-toggle">
                 <button id="showMap" class="toggle-btn active">🗺️ Karte</button>
                 <button id="showDetails" class="toggle-btn">📝 Details</button>
@@ -87,18 +87,18 @@
                         <span class="day-weather">☀️ 30°C • Sonnig</span>
                     </div>
                 </div>
-
+                
                 <div class="day-content" id="dayContent">
                     <!-- Dynamischer Inhalt wird hier eingefügt -->
                 </div>
-
+                
                 <div class="locations-section" id="locationsSection">
                     <h3>📍 Orte des Tages</h3>
                     <div class="locations-grid" id="locationsGrid">
                         <!-- Location-Karten werden hier eingefügt -->
                     </div>
                 </div>
-
+                
                 <div class="day-summary" id="daySummary">
                     <!-- Zusammenfassung wird hier eingefügt -->
                 </div>
@@ -112,15 +112,15 @@
         </div>
     </footer>
 
-
-
+    
+    
     <!-- Daten -->
     <script src="data.js"></script>
-
+    
     <!-- Haupt-JavaScript -->
     <script src="script.js"></script>
 
     <!-- Google Maps API -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaSjYngR6cd5O9BMqPbCTStFFG4AoOFis&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaSjYngR6cd5O9BMqPbCTStFFG4AoOFis&libraries=places&callback=initMap"></script>
 </body>
 </html>
