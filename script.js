@@ -410,6 +410,7 @@ class KorfuUrlaubsApp {
     // Funktion zum Abrufen von Bildern für Locations
     async fetchLocationImage(location) {
         const defaultPlaceholder = "https://via.placeholder.com/150";
+        const googleMapsApiKey = "AIzaSyDaSjYngR6cd5O9BMqPbCTStFFG4AoOFis"; // Re-added API key
 
         // 1. Try Google Places Photos API
         try {
