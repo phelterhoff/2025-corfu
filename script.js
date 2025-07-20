@@ -30,7 +30,8 @@ class KorfuUrlaubsApp {
             zoom: 13,
             mapTypeControl: false,
             streetViewControl: false,
-            fullscreenControl: false
+            fullscreenControl: false,
+            mapId: "434ed8f20821ea00b1798980" // Your provided Map ID
         });
 
         this.markerGroup = []; // Array für Google Maps Marker
